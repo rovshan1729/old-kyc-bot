@@ -1,0 +1,8 @@
+Start Time: 2025-01-31 16:15:16.645843
+User ID: 7995976056
+Username: bbpayout
+phone_number: 79159150415
+collect_fio: Лямин Никита Ильич
+platform_login: 01 RUB | Exotic Out ^
+api_key: РФ
+workgroup_name: СПб, ул, Плесецкая 10

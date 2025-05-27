@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXOTIC</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <script src="{{ url_for('static', filename='scripts/base.js') }}" defer></script>
+</head>
+<body>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+</body>
+</html>

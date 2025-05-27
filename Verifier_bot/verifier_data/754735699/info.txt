@@ -1,0 +1,8 @@
+Start Time: 2025-01-31 16:53:55.053419
+User ID: 754735699
+Username: Vlad_chupahin
+phone_number: 79802083626
+collect_fio: Чупахин Владислав Сергеевич
+platform_login: 04.02
+api_key: Россия
+workgroup_name: Газгольдерная 10

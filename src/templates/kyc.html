@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/kyc.css') }}">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<script src="{{ url_for('static', filename='scripts/kyc.js') }}" defer></script>
+
+<div class="content">
+    <div class="controls-container">
+        <input type="text" id="searchInput" placeholder="Search..." />
+        <button class="btn download-btn" onclick="toggleDownloadModal()">Скачать</button>
+        <div id="downloadModal" class="download-modal">
+            <div class="download-modal-content">
+                <button class="btn" onclick="downloadExcel()">Excel</button>
+                <button class="btn" onclick="downloadPDF()">PDF</button>
+                <button class="btn" onclick="downloadJSON()">JSON</button>
+                <button class="btn" onclick="downloadAllZips()">All Zips</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table id="documentTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>User ID</th>
+                    <th>Time</th>
+                    <th>Nickname</th>
+                    <th>Full Name</th>
+                    <th>Group</th>
+                    <th>Geo</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr class="document-row">
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2]|datetimeformat }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+                    <td>{{ row[5] }}</td>
+                    <td>{{ row[6] }}</td>
+                    <td>{{ row[7] }}</td>
+                    <td>{{ row[8] }}</td>
+                    <td class="actions">
+                        {% if row[9] %}
+                            <button class="btn-action" onclick="showPreviewModal('{{ row[1] }}', '{{ row[9] }}')">Photo 1</button>
+                        {% endif %}
+                        {% if row[10] %}
+                            <button class="btn-action" onclick="showPreviewModal('{{ row[1] }}', '{{ row[10] }}')">Photo 2</button>
+                        {% endif %}
+                        {% if row[11] %}
+                            <button class="btn-action" onclick="showPreviewModal('{{ row[1] }}', '{{ row[11] }}')">Video</button>
+                        {% endif %}
+                        <button class="btn-action" onclick="downloadUserPDF('{{ row[1] }}')">Скачать</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="previewModal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close" onclick="closePreview()">✕</span>
+        <div id="previewContent" class="modal-body"></div>
+        <button id="downloadBtn" class="btn">Download</button>
+    </div>
+</div>
+{% endblock %}
