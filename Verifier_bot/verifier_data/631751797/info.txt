@@ -1,0 +1,8 @@
+Start Time: 2025-05-28 00:27:21.309153
+User ID: 631751797
+Username: hardy1729
+phone_number: +998883424033
+collect_fio: ew wew
+platform_login: workgroup_name
+api_key: geo_test
+workgroup_name: address_test
