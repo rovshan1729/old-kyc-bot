@@ -188,7 +188,4 @@ cython_debug/
 .cursorindexingignore
 .idea/*
 .DS_Store
-src/.DS_Store
-src/backend/.DS_Store
-Verifier_bot/.DS_Store
 */.DS_Store
