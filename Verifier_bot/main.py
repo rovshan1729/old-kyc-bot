@@ -84,9 +84,9 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = str(update.effective_user.id)
     user_dir = os.path.join(BASE_DIRECTORY, user_id)
 
-    # if os.path.exists(user_dir):
-    #     await update.message.reply_text(ALREADY_REGISTERED, parse_mode="HTML")
-    #     return ConversationHandler.END
+    if os.path.exists(user_dir):
+        await update.message.reply_text(ALREADY_REGISTERED, parse_mode="HTML")
+        return ConversationHandler.END
     
     os.makedirs(user_dir, exist_ok=True)
 
