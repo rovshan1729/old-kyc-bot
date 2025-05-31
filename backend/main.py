@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Depends, Header
+from fastapi import FastAPI, HTTPException, Depends, Header, Form, UploadFile, File
 from pydantic import BaseModel
 from typing import Optional
 import sqlite3
@@ -56,6 +56,7 @@ async def verify_api_key(api_key: str = Header(..., alias="Authorization", conve
         raise HTTPException(status_code=403, detail="Invalid API key")
 
 
+FULL_PATH_OF_VERIFIER_BOT = Path(__file__).resolve().parent.parent / "Verifier_bot/"
 @app.get("/users/", response_model=list[User], dependencies=[Depends(verify_api_key)])
 async def list_users():
     """Retrieve a list of all users from the user_verification table."""
@@ -77,9 +78,9 @@ async def list_users():
                 api_key=row["api_key"],
                 workgroup_name=row["workgroup_name"],
                 phone_number=row["phone_number"],
-                passport_photo_1=row["passport_photo_1"],
-                passport_photo_2=row["passport_photo_2"],
-                video_file=row["video_file"]
+                passport_photo_1=str(FULL_PATH_OF_VERIFIER_BOT / row["passport_photo_1"]),
+                passport_photo_2=str(FULL_PATH_OF_VERIFIER_BOT / row["passport_photo_2"]),
+                video_file=str(FULL_PATH_OF_VERIFIER_BOT / row["video_file"])
             )
             for row in users
         ]
@@ -87,35 +88,99 @@ async def list_users():
     except sqlite3.Error as e:
         raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
 
+
 @app.put("/users/{user_id}", response_model=User, dependencies=[Depends(verify_api_key)])
-async def update_user(user_id: str, user_update: UserUpdate):
-    """Update specific fields for a user by user_id."""
+async def update_user(
+    user_id: str,
+    username: Optional[str] = Form(None),
+    collect_fio: Optional[str] = Form(None),
+    phone_number: Optional[str] = Form(None),
+    passport_photo_1: Optional[UploadFile] = File(None),
+    passport_photo_2: Optional[UploadFile] = File(None),
+    video_file: Optional[UploadFile] = File(None)
+):
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
 
-        # Check if user exists
+        # Проверка на существование пользователя
         cursor.execute("SELECT * FROM user_verification WHERE user_id = ?", (user_id,))
         user = cursor.fetchone()
         if not user:
             conn.close()
             raise HTTPException(status_code=404, detail="User not found")
 
-        # Prepare update fields
-        update_data = user_update.dict(exclude_unset=True)
+        update_data = {}
+
+        if username is not None:
+            update_data["username"] = username
+        if collect_fio is not None:
+            update_data["collect_fio"] = collect_fio
+        if phone_number is not None:
+            update_data["phone_number"] = phone_number
+
+        import os
+
+        if passport_photo_1 is not None:
+            old_path = user["passport_photo_1"] if user["passport_photo_1"] is not None else None
+            if old_path and os.path.exists(old_path):
+                os.remove(old_path)
+                print(f"Deleted old file: {old_path}")
+
+            folder = os.path.dirname(old_path) if old_path else f"uploads/{user_id}"
+            os.makedirs(folder, exist_ok=True)
+
+            file_path = os.path.join(folder, passport_photo_1.filename)
+            with open(file_path, "wb") as buffer:
+                content = await passport_photo_1.read()  # Читаем содержимое
+                buffer.write(content)
+                print(f"Saved new file to: {file_path}, size: {len(content)} bytes")
+            update_data["passport_photo_1"] = file_path
+
+        if passport_photo_2 is not None:
+            old_path = user["passport_photo_2"] if user["passport_photo_2"] is not None else None
+            if old_path and os.path.exists(old_path):
+                os.remove(old_path)
+                print(f"Deleted old file: {old_path}")
+
+            folder = os.path.dirname(old_path) if old_path else f"uploads/{user_id}"
+            os.makedirs(folder, exist_ok=True)
+
+            file_path = os.path.join(folder, passport_photo_2.filename)
+            with open(file_path, "wb") as buffer:
+                content = await passport_photo_2.read()
+                buffer.write(content)
+                print(f"Saved new file to: {file_path}, size: {len(content)} bytes")
+            update_data["passport_photo_2"] = file_path
+
+        if video_file is not None:
+            old_path = user["video_file"] if user["video_file"] is not None else None
+            if old_path and os.path.exists(old_path):
+                os.remove(old_path)
+                print(f"Deleted old file: {old_path}")
+
+            folder = os.path.dirname(old_path) if old_path else f"uploads/{user_id}"
+            os.makedirs(folder, exist_ok=True)
+
+            file_path = os.path.join(folder, video_file.filename)
+            with open(file_path, "wb") as buffer:
+                content = await video_file.read()
+                buffer.write(content)
+                print(f"Saved new file to: {file_path}, size: {len(content)} bytes")
+            update_data["video_file"] = file_path
+
         if not update_data:
             conn.close()
             raise HTTPException(status_code=400, detail="No fields provided for update")
 
-        # Build SQL update query dynamically
+        # Динамическое обновление полей
         set_clause = ", ".join(f"{key} = ?" for key in update_data.keys())
         values = list(update_data.values()) + [user_id]
         query = f"UPDATE user_verification SET {set_clause} WHERE user_id = ?"
-
         cursor.execute(query, values)
         conn.commit()
 
-        # Fetch updated user
+        # Получение обновленного пользователя
         cursor.execute("SELECT * FROM user_verification WHERE user_id = ?", (user_id,))
         updated_user = cursor.fetchone()
         conn.close()
@@ -132,12 +197,15 @@ async def update_user(user_id: str, user_update: UserUpdate):
             api_key=updated_user["api_key"],
             workgroup_name=updated_user["workgroup_name"],
             phone_number=updated_user["phone_number"],
-            passport_photo_1=updated_user["passport_photo_1"],
-            passport_photo_2=updated_user["passport_photo_2"],
-            video_file=updated_user["video_file"]
+            passport_photo_1=str(FULL_PATH_OF_VERIFIER_BOT / updated_user["passport_photo_1"]),
+            passport_photo_2=str(FULL_PATH_OF_VERIFIER_BOT / updated_user["passport_photo_2"]),
+            video_file=str(FULL_PATH_OF_VERIFIER_BOT / updated_user["video_file"])
         )
+
     except sqlite3.Error as e:
         raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
 
 if __name__ == "__main__":
     import uvicorn
