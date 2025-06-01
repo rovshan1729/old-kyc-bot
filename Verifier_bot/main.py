@@ -73,7 +73,8 @@ def init_db():
             phone_number TEXT,
             passport_photo_1 TEXT,
             passport_photo_2 TEXT,
-            video_file TEXT
+            video_file TEXT,
+            is_verified INTEGER DEFAULT 0
         )
     ''')
     conn.commit()
@@ -299,17 +300,40 @@ def save_to_db(user_id: str):
             elif low_line.startswith("workgroup_name:"):
                 data["workgroup_name"] = line.split(":", 1)[1].strip()
 
+    required_fields = [
+        data["start_time"],
+        data["username"],
+        data["collect_fio"],
+        data["platform_login"],
+        data["api_key"],
+        data["workgroup_name"],
+        data["phone_number"],
+    ]
+
+    # Проверяем наличие фото и видео файлов (локально считаем, что если файл есть - всё ок)
+    photo1_path = os.path.join(user_dir, "passport_photo_1.jpg")
+    photo2_path = os.path.join(user_dir, "passport_photo_2.jpg")
+    video_path = os.path.join(user_dir, "real_time_video.mp4")
+
+    files_exist = all([
+        os.path.exists(photo1_path),
+        os.path.exists(photo2_path),
+        os.path.exists(video_path)
+    ])
+
+    is_verified = int(all(required_fields) and files_exist)
+
     photo1_link = f"verifier_data/{user_id}/passport_photo_1.jpg"
     photo2_link = f"verifier_data/{user_id}/passport_photo_2.jpg"
-    video_link  = f"verifier_data/{user_id}/real_time_video.mp4"
+    video_link = f"verifier_data/{user_id}/real_time_video.mp4"
 
     conn = sqlite3.connect(DATABASE_PATH)
     c = conn.cursor()
     c.execute("""
         INSERT OR REPLACE INTO user_verification (
             user_id, start_time, username, collect_fio, platform_login, api_key,
-            workgroup_name, phone_number, passport_photo_1, passport_photo_2, video_file
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            workgroup_name, phone_number, passport_photo_1, passport_photo_2, video_file, is_verified
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (
         data["user_id"],
         data["start_time"],
@@ -321,7 +345,8 @@ def save_to_db(user_id: str):
         data["phone_number"],
         photo1_link,
         photo2_link,
-        video_link
+        video_link,
+        is_verified
     ))
     conn.commit()
     conn.close()

@@ -1,15 +1,25 @@
-from fastapi import FastAPI, HTTPException, Depends, Header, Form, UploadFile, File
+from fastapi import FastAPI, HTTPException, Depends, Header, Form, UploadFile, File, Request, Query
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import JSONResponse
+
 from pydantic import BaseModel
 from typing import Optional
 import sqlite3
 from pathlib import Path
+from datetime import datetime, timedelta
+import os
 
 app = FastAPI(title="User Verification API")
+
 
 # Database path (adjust as needed)
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATABASE_PATH = BASE_DIR / "Verifier_bot/verifier_data.db"
+VERIFIER_DATA_DIR = BASE_DIR / "Verifier_bot" / "verifier_data"
 API_KEY = "4cb0385f-25c7-4103-9df8-7783c09fd87d"
+
+app.mount("/static", StaticFiles(directory=VERIFIER_DATA_DIR), name="static_files")
+
 
 if not DATABASE_PATH.exists():
     raise FileNotFoundError(f"Database file not found at {DATABASE_PATH}")
@@ -58,18 +68,39 @@ async def verify_api_key(api_key: str = Header(..., alias="Authorization", conve
 
 FULL_PATH_OF_VERIFIER_BOT = Path(__file__).resolve().parent.parent / "Verifier_bot/"
 @app.get("/users/", response_model=list[User], dependencies=[Depends(verify_api_key)])
-async def list_users():
+async def list_users(request: Request, is_new: bool = False):
     """Retrieve a list of all users from the user_verification table."""
     try:
+        BASE_URL = str(request.base_url) + "static/"
+
         conn = get_db_connection()
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM user_verification")
         users = cursor.fetchall()
         conn.close()
 
-        # Convert database rows to Pydantic models
-        user_list = [
-            User(
+        # текущий момент и 72 часа назад
+        now = datetime.utcnow()
+        last_72_hours = now - timedelta(hours=72)
+
+        user_list = []
+        for row in users:
+            # Проверка старта времени
+            user_start_time = None
+            if row["start_time"]:
+                try:
+                    start_time_ptr = row["start_time"]
+                    if "." in start_time_ptr:
+                        start_time_ptr = start_time_ptr.split(".")[0]
+                        user_start_time = datetime.strptime(start_time_ptr, "%Y-%m-%d %H:%M:%S")
+                except ValueError as e:
+                    pass  # или логгировать что формат неверный
+
+            # если фильтр is_new=True — пропускаем старых пользователей
+            if is_new and (not user_start_time or user_start_time < last_72_hours):
+                continue
+
+            user_list.append(User(
                 user_id=row["user_id"],
                 start_time=row["start_time"],
                 username=row["username"],
@@ -78,27 +109,34 @@ async def list_users():
                 api_key=row["api_key"],
                 workgroup_name=row["workgroup_name"],
                 phone_number=row["phone_number"],
-                passport_photo_1=str(FULL_PATH_OF_VERIFIER_BOT / row["passport_photo_1"]),
-                passport_photo_2=str(FULL_PATH_OF_VERIFIER_BOT / row["passport_photo_2"]),
-                video_file=str(FULL_PATH_OF_VERIFIER_BOT / row["video_file"])
-            )
-            for row in users
-        ]
+                passport_photo_1=str(BASE_URL + row["passport_photo_1"].replace("verifier_data/", "")) if row["passport_photo_1"] else None,
+                passport_photo_2=str(BASE_URL + row["passport_photo_2"].replace("verifier_data/", "")) if row["passport_photo_2"] else None,
+                video_file=str(BASE_URL + row["video_file"].replace("verifier_data/", "")) if row["video_file"] else None
+            ))
+
         return user_list
     except sqlite3.Error as e:
         raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
 
 
-@app.put("/users/{user_id}", response_model=User, dependencies=[Depends(verify_api_key)])
+@app.put("/users/{user_id}/", response_model=User, dependencies=[Depends(verify_api_key)])
 async def update_user(
+    request: Request,
     user_id: str,
     username: Optional[str] = Form(None),
     collect_fio: Optional[str] = Form(None),
     phone_number: Optional[str] = Form(None),
     passport_photo_1: Optional[UploadFile] = File(None),
     passport_photo_2: Optional[UploadFile] = File(None),
-    video_file: Optional[UploadFile] = File(None)
+    video_file: Optional[UploadFile] = File(None),
 ):
+    BASE_URL = str(request.base_url) + "static/"
+
+    if all(
+            value is None
+            for value in [username, collect_fio, phone_number, passport_photo_1, passport_photo_2, video_file]
+    ):
+        raise HTTPException(status_code=400, detail="No data provided for update.")
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
@@ -123,51 +161,52 @@ async def update_user(
 
         if passport_photo_1 is not None:
             old_path = user["passport_photo_1"] if user["passport_photo_1"] is not None else None
+            old_path = os.path.join(FULL_PATH_OF_VERIFIER_BOT / old_path)
             if old_path and os.path.exists(old_path):
                 os.remove(old_path)
-                print(f"Deleted old file: {old_path}")
 
             folder = os.path.dirname(old_path) if old_path else f"uploads/{user_id}"
             os.makedirs(folder, exist_ok=True)
 
             file_path = os.path.join(folder, passport_photo_1.filename)
+            for_db_file_path = os.path.join(folder.split("/")[-1], passport_photo_1.filename)
             with open(file_path, "wb") as buffer:
                 content = await passport_photo_1.read()  # Читаем содержимое
                 buffer.write(content)
-                print(f"Saved new file to: {file_path}, size: {len(content)} bytes")
-            update_data["passport_photo_1"] = file_path
+            update_data["passport_photo_1"] = for_db_file_path
 
         if passport_photo_2 is not None:
             old_path = user["passport_photo_2"] if user["passport_photo_2"] is not None else None
+            old_path = os.path.join(FULL_PATH_OF_VERIFIER_BOT / old_path)
             if old_path and os.path.exists(old_path):
                 os.remove(old_path)
-                print(f"Deleted old file: {old_path}")
 
             folder = os.path.dirname(old_path) if old_path else f"uploads/{user_id}"
             os.makedirs(folder, exist_ok=True)
 
             file_path = os.path.join(folder, passport_photo_2.filename)
+            for_db_file_path = os.path.join(folder.split("/")[-1], passport_photo_2.filename)
             with open(file_path, "wb") as buffer:
                 content = await passport_photo_2.read()
                 buffer.write(content)
-                print(f"Saved new file to: {file_path}, size: {len(content)} bytes")
-            update_data["passport_photo_2"] = file_path
+            update_data["passport_photo_2"] = for_db_file_path
 
         if video_file is not None:
             old_path = user["video_file"] if user["video_file"] is not None else None
+            old_path = os.path.join(FULL_PATH_OF_VERIFIER_BOT / old_path)
+
             if old_path and os.path.exists(old_path):
                 os.remove(old_path)
-                print(f"Deleted old file: {old_path}")
 
             folder = os.path.dirname(old_path) if old_path else f"uploads/{user_id}"
             os.makedirs(folder, exist_ok=True)
 
             file_path = os.path.join(folder, video_file.filename)
+            for_db_file_path = os.path.join(folder.split("/")[-1], video_file.filename)
             with open(file_path, "wb") as buffer:
                 content = await video_file.read()
                 buffer.write(content)
-                print(f"Saved new file to: {file_path}, size: {len(content)} bytes")
-            update_data["video_file"] = file_path
+            update_data["video_file"] = for_db_file_path
 
         if not update_data:
             conn.close()
@@ -197,15 +236,55 @@ async def update_user(
             api_key=updated_user["api_key"],
             workgroup_name=updated_user["workgroup_name"],
             phone_number=updated_user["phone_number"],
-            passport_photo_1=str(FULL_PATH_OF_VERIFIER_BOT / updated_user["passport_photo_1"]),
-            passport_photo_2=str(FULL_PATH_OF_VERIFIER_BOT / updated_user["passport_photo_2"]),
-            video_file=str(FULL_PATH_OF_VERIFIER_BOT / updated_user["video_file"])
+            passport_photo_1=str(BASE_URL + updated_user["passport_photo_1"]),
+            passport_photo_2=str(BASE_URL + updated_user["passport_photo_2"]),
+            video_file=str(BASE_URL + updated_user["video_file"])
         )
 
     except sqlite3.Error as e:
         raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
+
+
+@app.delete("/users/{user_id}/", dependencies=[Depends(verify_api_key)])
+async def delete_user(user_id: str):
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        # Проверяем, существует ли пользователь
+        cursor.execute("SELECT * FROM user_verification WHERE user_id = ?", (user_id,))
+        user = cursor.fetchone()
+        if not user:
+            conn.close()
+            raise HTTPException(status_code=404, detail="User not found")
+
+        # Удаляем связанные файлы, если они существуют
+        files_to_delete = [
+            user["passport_photo_1"],
+            user["passport_photo_2"],
+            user["video_file"]
+        ]
+
+        for file_path in files_to_delete:
+            if file_path:
+                full_path = FULL_PATH_OF_VERIFIER_BOT / file_path
+                if full_path.exists():
+                    os.remove(full_path)
+
+        # Удаляем запись пользователя из базы
+        cursor.execute("DELETE FROM user_verification WHERE user_id = ?", (user_id,))
+        conn.commit()
+        conn.close()
+
+        return JSONResponse(status_code=200, content={"detail": f"User {user_id} successfully deleted."})
+
+    except sqlite3.Error as e:
+        raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
+
 
 if __name__ == "__main__":
     import uvicorn
