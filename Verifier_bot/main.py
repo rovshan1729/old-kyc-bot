@@ -81,6 +81,23 @@ def init_db():
     conn.close()
 
 
+def add_is_verified_column():
+    conn = sqlite3.connect(DATABASE_PATH)
+    cursor = conn.cursor()
+
+    # Проверяем, есть ли колонка is_verified в таблице
+    cursor.execute("PRAGMA table_info(user_verification)")
+    columns = [column[1] for column in cursor.fetchall()]
+
+    if 'is_verified' not in columns:
+        cursor.execute("ALTER TABLE user_verification ADD COLUMN is_verified INTEGER DEFAULT 1")
+    else:
+        print("Колонка is_verified уже существует.")
+
+    conn.commit()
+    conn.close()
+
+
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = str(update.effective_user.id)
     user_dir = os.path.join(BASE_DIRECTORY, user_id)
@@ -132,6 +149,7 @@ async def step_collect_phone(update: Update, context: ContextTypes.DEFAULT_TYPE)
         parse_mode="HTML",
         reply_markup=ReplyKeyboardRemove()
     )
+    save_to_db(user_id)
     return STEP_FIO_INPUT
 
 async def step_fio(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -145,6 +163,7 @@ async def step_fio(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f.write(f"collect_fio: {fio}\n")
 
     await update.message.reply_text(STEP_LOGIN, parse_mode="HTML")
+    save_to_db(user_id)
     return STEP_LOGIN_INPUT
 
 async def step_login(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -158,6 +177,7 @@ async def step_login(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f.write(f"platform_login: {login_txt}\n")
 
     await update.message.reply_text(STEP_APIKEY, parse_mode="HTML")
+    save_to_db(user_id)
     return STEP_APIKEY_INPUT
 
 async def step_apikey(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -172,7 +192,7 @@ async def step_apikey(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f.write(f"api_key: {apikey_txt}\n")
 
     await update.message.reply_text(STEP_WORKGROUP_TEXT, parse_mode="HTML")
-
+    save_to_db(user_id)
     return STATE_WORKGROUP
 
 async def step_workgroup(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -187,6 +207,7 @@ async def step_workgroup(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f.write(f"workgroup_name: {groupname}\n")
 
     await update.message.reply_text(STEP_PASSPORT_PHOTO_1, parse_mode="HTML")
+    save_to_db(user_id)
     return STEP_PASS_PHOTO_1
 
 async def step_pass_photo_1(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -213,6 +234,7 @@ async def step_pass_photo_1(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await file.download_to_drive(local_path)
 
     await update.message.reply_text(STEP_PASSPORT_PHOTO_2, parse_mode="HTML")
+    save_to_db(user_id)
     return STEP_PASS_PHOTO_2
 
 async def step_pass_photo_2(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -239,6 +261,7 @@ async def step_pass_photo_2(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await file.download_to_drive(local_path)
 
     await update.message.reply_text(STEP_VIDEO_REQUEST, parse_mode="HTML")
+    save_to_db(user_id)
     return STEP_VIDEO
 
 async def step_video(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -301,13 +324,13 @@ def save_to_db(user_id: str):
                 data["workgroup_name"] = line.split(":", 1)[1].strip()
 
     required_fields = [
-        data["start_time"],
-        data["username"],
-        data["collect_fio"],
-        data["platform_login"],
-        data["api_key"],
-        data["workgroup_name"],
-        data["phone_number"],
+        data.get("start_time"),
+        data.get("username"),
+        data.get("collect_fio"),
+        data.get("platform_login"),
+        data.get("api_key"),
+        data.get("workgroup_name"),
+        data.get("phone_number"),
     ]
 
     # Проверяем наличие фото и видео файлов (локально считаем, что если файл есть - всё ок)
@@ -327,32 +350,76 @@ def save_to_db(user_id: str):
     photo2_link = f"verifier_data/{user_id}/passport_photo_2.jpg"
     video_link = f"verifier_data/{user_id}/real_time_video.mp4"
 
-    conn = sqlite3.connect(DATABASE_PATH)
-    c = conn.cursor()
-    c.execute("""
-        INSERT OR REPLACE INTO user_verification (
-            user_id, start_time, username, collect_fio, platform_login, api_key,
-            workgroup_name, phone_number, passport_photo_1, passport_photo_2, video_file, is_verified
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    """, (
-        data["user_id"],
-        data["start_time"],
-        data["username"],
-        data["collect_fio"],
-        data["platform_login"],
-        data["api_key"],
-        data["workgroup_name"],
-        data["phone_number"],
-        photo1_link,
-        photo2_link,
-        video_link,
-        is_verified
-    ))
-    conn.commit()
-    conn.close()
+    try:
+        conn = sqlite3.connect(DATABASE_PATH)
+        c = conn.cursor()
+
+        # Проверяем наличие записи с таким user_id
+        c.execute("SELECT user_id FROM user_verification WHERE user_id = ?", (user_id,))
+        exists = c.fetchone()
+
+        if exists:
+            # Если запись уже есть — обновляем только изменившиеся данные
+            c.execute("""
+                      UPDATE user_verification
+                      SET start_time       = ?,
+                          username         = ?,
+                          collect_fio      = ?,
+                          platform_login   = ?,
+                          api_key          = ?,
+                          workgroup_name   = ?,
+                          phone_number     = ?,
+                          passport_photo_1 = ?,
+                          passport_photo_2 = ?,
+                          video_file       = ?,
+                          is_verified      = ?
+                      WHERE user_id = ?
+                      """, (
+                          data.get("start_time"),
+                          data.get("username"),
+                          data.get("collect_fio"),
+                          data.get("platform_login"),
+                          data.get("api_key"),
+                          data.get("workgroup_name"),
+                          data.get("phone_number"),
+                          photo1_link,
+                          photo2_link,
+                          video_link,
+                          is_verified,
+                          user_id
+                      ))
+        else:
+            # Если записи нет — создаём новую
+            c.execute("""
+                      INSERT INTO user_verification (user_id, start_time, username, collect_fio, platform_login,
+                                                     api_key,
+                                                     workgroup_name, phone_number, passport_photo_1, passport_photo_2,
+                                                     video_file, is_verified)
+                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                      """, (
+                          data.get("user_id"),
+                          data.get("start_time"),
+                          data.get("username"),
+                          data.get("collect_fio"),
+                          data.get("platform_login"),
+                          data.get("api_key"),
+                          data.get("workgroup_name"),
+                          data.get("phone_number"),
+                          photo1_link,
+                          photo2_link,
+                          video_link,
+                          is_verified
+                      ))
+
+        conn.commit()
+        conn.close()
+
+    except Exception as e:
+        print(f"[save_to_db] Ошибка при работе с БД: {e}")
 
 def main():
     init_db()
+    add_is_verified_column()
     application = Application.builder().token(TOKEN).build()
 
     conv_handler = ConversationHandler(

@@ -37,6 +37,7 @@ class User(BaseModel):
     passport_photo_1: Optional[str] = None
     passport_photo_2: Optional[str] = None
     video_file: Optional[str] = None
+    is_verified: Optional[bool] = False
 
 # Pydantic model for updating user data (request)
 class UserUpdate(BaseModel):
@@ -100,6 +101,11 @@ async def list_users(request: Request, is_new: bool = False):
             if is_new and (not user_start_time or user_start_time < last_72_hours):
                 continue
 
+            try:
+                is_verified = row["is_verified"]
+            except IndexError:
+                is_verified = None
+
             user_list.append(User(
                 user_id=row["user_id"],
                 start_time=row["start_time"],
@@ -111,7 +117,8 @@ async def list_users(request: Request, is_new: bool = False):
                 phone_number=row["phone_number"],
                 passport_photo_1=str(BASE_URL + row["passport_photo_1"].replace("verifier_data/", "")) if row["passport_photo_1"] else None,
                 passport_photo_2=str(BASE_URL + row["passport_photo_2"].replace("verifier_data/", "")) if row["passport_photo_2"] else None,
-                video_file=str(BASE_URL + row["video_file"].replace("verifier_data/", "")) if row["video_file"] else None
+                video_file=str(BASE_URL + row["video_file"].replace("verifier_data/", "")) if row["video_file"] else None,
+                is_verified=is_verified
             ))
 
         return user_list
@@ -259,6 +266,11 @@ async def delete_user(user_id: str):
         if not user:
             conn.close()
             raise HTTPException(status_code=404, detail="User not found")
+
+        if user["is_verified"] == 1:
+            conn.close()
+            raise HTTPException(status_code=403, detail="Cannot delete a verified user.")
+
 
         # Удаляем связанные файлы, если они существуют
         files_to_delete = [
