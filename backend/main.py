@@ -50,6 +50,7 @@ class UserUpdate(BaseModel):
     passport_photo_1: Optional[str] = None
     passport_photo_2: Optional[str] = None
     video_file: Optional[str] = None
+    is_verified: Optional[bool] = None
 
 def get_db_connection():
     """Create and return a SQLite database connection."""
@@ -133,15 +134,19 @@ async def update_user(
     username: Optional[str] = Form(None),
     collect_fio: Optional[str] = Form(None),
     phone_number: Optional[str] = Form(None),
+    platform_login: Optional[str] = Form(None),
+    api_key: Optional[str] = Form(None),
+    workgroup_name: Optional[str] = Form(None),
     passport_photo_1: Optional[UploadFile] = File(None),
     passport_photo_2: Optional[UploadFile] = File(None),
     video_file: Optional[UploadFile] = File(None),
+    is_verified: Optional[bool] = Form(None),
 ):
     BASE_URL = str(request.base_url) + "static/"
 
     if all(
             value is None
-            for value in [username, collect_fio, phone_number, passport_photo_1, passport_photo_2, video_file]
+            for value in [username, collect_fio, phone_number, platform_login, api_key, workgroup_name, passport_photo_1, passport_photo_2, video_file, is_verified]
     ):
         raise HTTPException(status_code=400, detail="No data provided for update.")
     try:
@@ -156,7 +161,14 @@ async def update_user(
             raise HTTPException(status_code=404, detail="User not found")
 
         update_data = {}
-
+        if platform_login is not None:
+            update_data["platform_login"] = platform_login
+        if api_key is not None:
+            update_data["api_key"] = api_key
+        if workgroup_name is not None:
+            update_data["workgroup_name"] = workgroup_name
+        if is_verified is not None:
+            update_data["is_verified"] = int(is_verified)
         if username is not None:
             update_data["username"] = username
         if collect_fio is not None:
@@ -245,7 +257,8 @@ async def update_user(
             phone_number=updated_user["phone_number"],
             passport_photo_1=str(BASE_URL + updated_user["passport_photo_1"]),
             passport_photo_2=str(BASE_URL + updated_user["passport_photo_2"]),
-            video_file=str(BASE_URL + updated_user["video_file"])
+            video_file=str(BASE_URL + updated_user["video_file"]),
+            is_verified=bool(updated_user["is_verified"])
         )
 
     except sqlite3.Error as e:

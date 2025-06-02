@@ -56,3 +56,4 @@ XlsxWriter>=3.2.2
 yarl>=1.18.3
 fastapi
 uvicorn
+python-multipart
