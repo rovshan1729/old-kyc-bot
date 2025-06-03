@@ -43,6 +43,7 @@ class User(BaseModel):
     passport_photo_2: Optional[str] = None
     video_file: Optional[str] = None
     description: Optional[str] = None
+    is_new: Optional[bool] = None
     is_verified: Optional[bool] = False
 
 # Pydantic model for updating user data (request)
@@ -106,6 +107,7 @@ async def list_users(request: Request, is_new: bool = False):
                     pass  # или логгировать что формат неверный
 
             # если фильтр is_new=True — пропускаем старых пользователей
+            is_new_for_api = user_start_time > last_72_hours
             if is_new and (not user_start_time or user_start_time < last_72_hours):
                 continue
 
@@ -132,6 +134,7 @@ async def list_users(request: Request, is_new: bool = False):
                 passport_photo_2=str(BASE_URL + row["passport_photo_2"].replace("verifier_data/", "")) if row["passport_photo_2"] else None,
                 video_file=str(BASE_URL + row["video_file"].replace("verifier_data/", "")) if row["video_file"] else None,
                 description=description,
+                is_new=is_new_for_api,
                 is_verified=is_verified
             ))
 
