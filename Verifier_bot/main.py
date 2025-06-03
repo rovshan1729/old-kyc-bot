@@ -74,6 +74,7 @@ def init_db():
             passport_photo_1 TEXT,
             passport_photo_2 TEXT,
             video_file TEXT,
+            description TEXT,
             is_verified INTEGER DEFAULT 0
         )
     ''')
@@ -96,6 +97,25 @@ def add_is_verified_column():
 
     conn.commit()
     conn.close()
+
+
+def add_description_column():
+    conn = sqlite3.connect(DATABASE_PATH)
+    cursor = conn.cursor()
+
+    # Проверяем, есть ли колонка description в таблице
+    cursor.execute("PRAGMA table_info(user_verification)")
+    columns = [column[1] for column in cursor.fetchall()]
+
+    if 'description' not in columns:
+        cursor.execute("ALTER TABLE user_verification ADD COLUMN description TEXT")
+        print("Колонка description успешно добавлена.")
+    else:
+        print("Колонка description уже существует.")
+
+    conn.commit()
+    conn.close()
+
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -357,7 +377,7 @@ def save_to_db(user_id: str):
         # Проверяем наличие записи с таким user_id
         c.execute("SELECT user_id FROM user_verification WHERE user_id = ?", (user_id,))
         exists = c.fetchone()
-
+        description = None
         if exists:
             # Если запись уже есть — обновляем только изменившиеся данные
             c.execute("""
@@ -372,6 +392,7 @@ def save_to_db(user_id: str):
                           passport_photo_1 = ?,
                           passport_photo_2 = ?,
                           video_file       = ?,
+                          description      = ?,
                           is_verified      = ?
                       WHERE user_id = ?
                       """, (
@@ -385,6 +406,7 @@ def save_to_db(user_id: str):
                           photo1_link,
                           photo2_link,
                           video_link,
+                          description,
                           is_verified,
                           user_id
                       ))
@@ -394,8 +416,8 @@ def save_to_db(user_id: str):
                       INSERT INTO user_verification (user_id, start_time, username, collect_fio, platform_login,
                                                      api_key,
                                                      workgroup_name, phone_number, passport_photo_1, passport_photo_2,
-                                                     video_file, is_verified)
-                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                                                     video_file, description, is_verified)
+                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                       """, (
                           data.get("user_id"),
                           data.get("start_time"),
@@ -408,6 +430,7 @@ def save_to_db(user_id: str):
                           photo1_link,
                           photo2_link,
                           video_link,
+                          description,
                           is_verified
                       ))
 
@@ -420,6 +443,7 @@ def save_to_db(user_id: str):
 def main():
     init_db()
     add_is_verified_column()
+    add_description_column()
     application = Application.builder().token(TOKEN).build()
 
     conv_handler = ConversationHandler(

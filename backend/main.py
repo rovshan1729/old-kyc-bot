@@ -37,6 +37,7 @@ class User(BaseModel):
     passport_photo_1: Optional[str] = None
     passport_photo_2: Optional[str] = None
     video_file: Optional[str] = None
+    description: Optional[str] = None
     is_verified: Optional[bool] = False
 
 # Pydantic model for updating user data (request)
@@ -50,6 +51,7 @@ class UserUpdate(BaseModel):
     passport_photo_1: Optional[str] = None
     passport_photo_2: Optional[str] = None
     video_file: Optional[str] = None
+    description: Optional[str] = None
     is_verified: Optional[bool] = None
 
 def get_db_connection():
@@ -107,6 +109,11 @@ async def list_users(request: Request, is_new: bool = False):
             except IndexError:
                 is_verified = None
 
+            try:
+                description = row["description"]
+            except IndexError:
+                description = ""
+
             user_list.append(User(
                 user_id=row["user_id"],
                 start_time=row["start_time"],
@@ -119,6 +126,7 @@ async def list_users(request: Request, is_new: bool = False):
                 passport_photo_1=str(BASE_URL + row["passport_photo_1"].replace("verifier_data/", "")) if row["passport_photo_1"] else None,
                 passport_photo_2=str(BASE_URL + row["passport_photo_2"].replace("verifier_data/", "")) if row["passport_photo_2"] else None,
                 video_file=str(BASE_URL + row["video_file"].replace("verifier_data/", "")) if row["video_file"] else None,
+                description=description,
                 is_verified=is_verified
             ))
 
@@ -140,13 +148,19 @@ async def update_user(
     passport_photo_1: Optional[UploadFile] = File(None),
     passport_photo_2: Optional[UploadFile] = File(None),
     video_file: Optional[UploadFile] = File(None),
-    is_verified: Optional[bool] = Form(None),
+    description: Optional[str] = Form(None),
+    is_verified: Optional[bool] = Form(None)
 ):
     BASE_URL = str(request.base_url) + "static/"
 
     if all(
             value is None
-            for value in [username, collect_fio, phone_number, platform_login, api_key, workgroup_name, passport_photo_1, passport_photo_2, video_file, is_verified]
+            for value in [
+                username, collect_fio, phone_number,
+                platform_login, api_key, workgroup_name,
+                passport_photo_1, passport_photo_2,
+                video_file, description, is_verified
+            ]
     ):
         raise HTTPException(status_code=400, detail="No data provided for update.")
     try:
@@ -169,6 +183,8 @@ async def update_user(
             update_data["workgroup_name"] = workgroup_name
         if is_verified is not None:
             update_data["is_verified"] = int(is_verified)
+        if description is not None:
+            update_data["description"] = str(description)
         if username is not None:
             update_data["username"] = username
         if collect_fio is not None:
@@ -258,6 +274,7 @@ async def update_user(
             passport_photo_1=str(BASE_URL + updated_user["passport_photo_1"]),
             passport_photo_2=str(BASE_URL + updated_user["passport_photo_2"]),
             video_file=str(BASE_URL + updated_user["video_file"]),
+            description=str(update_data["description"]),
             is_verified=bool(updated_user["is_verified"])
         )
 
