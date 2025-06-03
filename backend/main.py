@@ -1,3 +1,5 @@
+import shutil
+
 from fastapi import FastAPI, HTTPException, Depends, Header, Form, UploadFile, File, Request, Query
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import JSONResponse
@@ -8,6 +10,9 @@ import sqlite3
 from pathlib import Path
 from datetime import datetime, timedelta
 import os
+import logging
+
+logger = logging.getLogger("uvicorn.error")
 
 app = FastAPI(title="User Verification API")
 
@@ -310,10 +315,11 @@ async def delete_user(user_id: str):
         ]
 
         for file_path in files_to_delete:
+            user_id = file_path.split("/")[1]
             if file_path:
-                full_path = FULL_PATH_OF_VERIFIER_BOT / file_path
+                full_path = FULL_PATH_OF_VERIFIER_BOT / f"verifier_data/{user_id}"
                 if full_path.exists():
-                    os.remove(full_path)
+                    shutil.rmtree(full_path)
 
         # Удаляем запись пользователя из базы
         cursor.execute("DELETE FROM user_verification WHERE user_id = ?", (user_id,))
