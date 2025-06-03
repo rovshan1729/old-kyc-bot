@@ -274,7 +274,7 @@ async def update_user(
             passport_photo_1=str(BASE_URL + updated_user["passport_photo_1"]),
             passport_photo_2=str(BASE_URL + updated_user["passport_photo_2"]),
             video_file=str(BASE_URL + updated_user["video_file"]),
-            description=str(update_data["description"]),
+            description=str(update_data["description"]) if update_data.get("description") else None,
             is_verified=bool(updated_user["is_verified"])
         )
 
