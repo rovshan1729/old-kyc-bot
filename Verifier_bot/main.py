@@ -91,7 +91,7 @@ def add_is_verified_column():
     columns = [column[1] for column in cursor.fetchall()]
 
     if 'is_verified' not in columns:
-        cursor.execute("ALTER TABLE user_verification ADD COLUMN is_verified INTEGER DEFAULT 1")
+        cursor.execute("ALTER TABLE user_verification ADD COLUMN is_verified INTEGER DEFAULT 0")
     else:
         print("Колонка is_verified уже существует.")
 
