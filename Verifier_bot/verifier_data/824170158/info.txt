@@ -1,0 +1,8 @@
+Start Time: 2025-05-18 19:16:50.541957
+User ID: 824170158
+Username: parssikk
+phone_number: +905521497077
+collect_fio: Ханов Алихан Ахмедович
+platform_login: 03 KGS | EXOTIC
+api_key: Киргизия
+workgroup_name: Ломоносовский проспект 25к1

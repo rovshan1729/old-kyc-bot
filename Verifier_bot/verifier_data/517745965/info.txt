@@ -1,0 +1,8 @@
+Start Time: 2025-02-22 21:44:54.544744
+User ID: 517745965
+Username: obep_rf
+phone_number: +79115325555
+collect_fio: Комин Григорий Денисович
+platform_login: 02.1 RUB | Exotic Out
+api_key: Россия
+workgroup_name: Сочи, Ясногорская 13/2к3, кВ 213

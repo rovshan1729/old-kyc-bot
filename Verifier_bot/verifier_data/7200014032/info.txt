@@ -1,0 +1,8 @@
+Start Time: 2025-02-20 03:41:35.600813
+User ID: 7200014032
+Username: maaniia
+phone_number: +7978 161 92 59
+collect_fio: Григорян Арамаис Каренович
+platform_login: 4.11 RUB | Exotic Out
+api_key: Российская Федерация
+workgroup_name: Бориса Михайлова 13, Севастополь

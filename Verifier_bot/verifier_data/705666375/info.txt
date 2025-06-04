@@ -1,0 +1,8 @@
+Start Time: 2025-05-25 19:22:10.185666
+User ID: 705666375
+Username: obidash
+phone_number: 79603479380
+collect_fio: Обидин Максим Юрьевич
+platform_login: Elk
+api_key: РФ
+workgroup_name: Город Москва, 2й вышейславцев переулок, д17, кв 222

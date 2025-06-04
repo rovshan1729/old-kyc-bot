@@ -1,0 +1,8 @@
+Start Time: 2025-03-20 20:09:15.745330
+User ID: 1099009170
+Username: HMS_TRINIDAD
+phone_number: 79778361121
+collect_fio: Шалыгин Александр Андреевич
+platform_login: Захарович
+api_key: Москва
+workgroup_name: Улица Юных Ленинцев д83 к1, кв 49

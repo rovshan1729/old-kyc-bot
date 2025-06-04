@@ -1,0 +1,8 @@
+Start Time: 2025-02-10 21:53:53.573411
+User ID: 106743355
+Username: Umixl
+phone_number: 998943031111
+collect_fio: TEMIROV UMID MUNAVVAROVICH
+platform_login: 05 RUB | Exotic Out
+api_key: Россия Узбекистан
+workgroup_name: Наманганская област, Касансайский район, Олмазор 49

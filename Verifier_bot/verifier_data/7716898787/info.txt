@@ -1,0 +1,8 @@
+Start Time: 2025-02-20 20:24:48.803190
+User ID: 7716898787
+Username: V_Company_004
+phone_number: +79257851445
+collect_fio: Ластовец Павел Дмитриевич
+platform_login: 11.6 RUB | Exotic Out
+api_key: Москва, Россия
+workgroup_name: г. Москва, ул. Назаровская 4

@@ -1,0 +1,8 @@
+Start Time: 2025-01-31 16:16:08.078982
+User ID: 7304942568
+Username: ssplinter325
+phone_number: +998884404457
+collect_fio: Миронов Антон Романович
+platform_login: 06 RUB
+api_key: Рф
+workgroup_name: Парковая 6 кВ 21

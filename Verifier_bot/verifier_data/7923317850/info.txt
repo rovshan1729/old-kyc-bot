@@ -1,0 +1,8 @@
+Start Time: 2025-01-31 16:34:01.091983
+User ID: 7923317850
+Username: PSP_Exotic
+phone_number: 79999999999
+collect_fio: Иванов Иван Иванович
+platform_login: 100 RUb
+api_key: RUB
+workgroup_name: Ул. Пушкина д. 10

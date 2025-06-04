@@ -1,0 +1,8 @@
+Start Time: 2025-05-07 16:26:46.037803
+User ID: 2041959811
+Username: Nnn01b
+phone_number: 79055536181
+collect_fio: Нажмудинов начибуло мусоевич
+platform_login: 04 TJS |Exotic
+api_key: Таджикистан
+workgroup_name: Душанбе

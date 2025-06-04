@@ -1,0 +1,8 @@
+Start Time: 2025-02-22 12:55:05.801152
+User ID: 118737735
+Username: popoyty
+phone_number: 79052076555
+collect_fio: Жидких Семен Иванович
+platform_login: 02.2 RUB | Exotic Out
+api_key: Спб
+workgroup_name: Утиная 28 кв 107

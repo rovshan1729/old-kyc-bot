@@ -1,0 +1,8 @@
+Start Time: 2025-03-03 15:32:27.197628
+User ID: 7035751043
+Username: kibermanagerr
+phone_number: 89991721589
+collect_fio: Калинкин Андрей Юрьевич
+platform_login: 02.4 RUB | Exotic Out
+api_key: РФ
+workgroup_name: Россия, г. Самара, ул. Воронежская 141-113

@@ -1,0 +1,9 @@
+Start Time: 2025-05-09 23:39:47.237976
+User ID: 1954171368
+Username: Mr_Ikramov
+phone_number: 998906992911
+collect_fio: Икромов Окилжон Одилжон угли
+platform_login: 05.15 RUB
+api_key: РФ, УЗБ
+workgroup_name: Наманганская область. Касансай район. Ул. Мажнунтол.
+70 дом

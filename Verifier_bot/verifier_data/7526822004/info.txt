@@ -1,0 +1,8 @@
+Start Time: 2025-04-11 16:36:06.304151
+User ID: 7526822004
+Username: yayahshi
+phone_number: 79178704219
+collect_fio: Фасхутдинов Реналь Ильдарович
+platform_login: 02 RUB_AMD | Exotic In
+api_key: Армения
+workgroup_name: г. Москва, ул. Перовское шоссе 2к2

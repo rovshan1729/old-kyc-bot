@@ -1,0 +1,8 @@
+Start Time: 2025-03-02 21:32:20.834930
+User ID: 7218699724
+Username: rojhhe
+phone_number: 79523252350
+collect_fio: Шкерин Юрий Александрович
+platform_login: 03.1 RUB | Exotic In
+api_key: Пермь
+workgroup_name: Свиязева 22, кв 77

@@ -1,0 +1,8 @@
+Start Time: 2025-04-15 17:15:16.770693
+User ID: 7065024441
+Username: arssser3
+phone_number: 89671025123
+collect_fio: Адамов Саид Тажибович
+platform_login: 02 AMD exotic
+api_key: Армения
+workgroup_name: Москва совхозная 1 кВ 3

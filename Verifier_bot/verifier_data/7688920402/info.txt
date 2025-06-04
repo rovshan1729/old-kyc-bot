@@ -1,0 +1,8 @@
+Start Time: 2025-02-26 21:45:22.516594
+User ID: 7688920402
+Username: BABYSHARK2277
+phone_number: 89967003579
+collect_fio: Дударев Павел Александрович
+platform_login: 13 RUB | Exotic Out
+api_key: Новосибирск
+workgroup_name: Ул.Большая Чиркизовская д 6 корпус 4 кВ 87

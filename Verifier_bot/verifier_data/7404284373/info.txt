@@ -1,0 +1,8 @@
+Start Time: 2025-02-15 12:13:41.956896
+User ID: 7404284373
+Username: CryptoFairyRu_oper1
+phone_number: +79917482168
+collect_fio: Цунский Владислав Николаевич
+platform_login: 08.2 RUB | Exotic Out
+api_key: РФ
+workgroup_name: Г. Москва, ул. Туристская д.29, к.1, кв.120

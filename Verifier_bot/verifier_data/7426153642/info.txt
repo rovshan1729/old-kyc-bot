@@ -1,0 +1,8 @@
+Start Time: 2025-05-20 20:22:12.097685
+User ID: 7426153642
+Username: Polkasamolet
+phone_number: 77076165749
+collect_fio: Сламбеков Даурен Аханович
+platform_login: 09 KZT | Exotic
+api_key: Казахстан
+workgroup_name: Аксай 1а, 11

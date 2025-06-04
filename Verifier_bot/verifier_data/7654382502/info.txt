@@ -1,0 +1,8 @@
+Start Time: 2025-03-12 14:08:44.125052
+User ID: 7654382502
+Username: imrichirich
+phone_number: 89811800707
+collect_fio: Гетманский Ян Андреевич
+platform_login: 21 RUB | Exotic In
+api_key: Рф
+workgroup_name: Асафьева 2к2

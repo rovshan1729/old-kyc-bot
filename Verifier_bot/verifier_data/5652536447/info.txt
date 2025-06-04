@@ -1,0 +1,8 @@
+Start Time: 2025-03-23 23:05:55.758497
+User ID: 5652536447
+Username: Ulugbek55775577
+phone_number: 998982703040
+collect_fio: QURBANOV ULUG'BEK MO'MINJONOVICH
+platform_login: 05.12 RUB | Exotic Out
+api_key: Россия Узбекистан
+workgroup_name: Наманганский область, Касансайский район, Сохибкор 22

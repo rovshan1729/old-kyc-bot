@@ -1,0 +1,8 @@
+Start Time: 2025-02-10 20:47:41.980986
+User ID: 1846405646
+Username: bax7i
+phone_number: +998330270270
+collect_fio: Алижонов Бахтиер Комилжон угли
+platform_login: 05.8 RUB | Exotic Out
+api_key: Россия, Узбекистан
+workgroup_name: Республика Узбекистан, Наманганская область, Касансайский район, Улица Навбахор 13 квартира

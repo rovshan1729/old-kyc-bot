@@ -1,0 +1,8 @@
+Start Time: 2025-04-09 19:17:11.085012
+User ID: 7226631221
+Username: payouter777
+phone_number: 89693409777
+collect_fio: Бер Тимофей Александрович
+platform_login: 04.14 RUB | Exotic Out
+api_key: РФ
+workgroup_name: Московская область,Одинцовский район, с. Жаворонки,ул. 30 лет октября,11,74

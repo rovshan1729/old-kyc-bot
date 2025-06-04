@@ -1,0 +1,11 @@
+Start Time: 2025-05-26 16:49:09.435210
+User ID: 989301752
+Username: RFG_N
+phone_number: 79832505983
+collect_fio: Волкомуров Никита Викторович
+platform_login: 02.16 RUB | Exotic Out
+api_key: Россия
+workgroup_name: Кемеровская область 
+Город Новокузнецк 
+Улица курако
+Дом 8

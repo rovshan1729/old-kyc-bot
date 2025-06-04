@@ -1,0 +1,8 @@
+Start Time: 2025-02-19 18:06:18.006688
+User ID: 7600197864
+Username: Cash_out111
+phone_number: +79787255806
+collect_fio: Алейников Андрей Евгеньевич
+platform_login: 04.10 RUB | Exotic Out
+api_key: Россия
+workgroup_name: Севастополь Омега 4-5

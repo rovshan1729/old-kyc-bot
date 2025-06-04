@@ -1,0 +1,8 @@
+Start Time: 2025-03-20 14:19:22.556408
+User ID: 7160006652
+Username: carloszlnd
+phone_number: +7 912 859 88 38
+collect_fio: Ардашев Александр Викторович
+platform_login: Exotic | Zeland team
+api_key: RU
+workgroup_name: г. Москва, ул. Академика Бочвара д.6

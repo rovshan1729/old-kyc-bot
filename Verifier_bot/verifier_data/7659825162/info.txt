@@ -1,0 +1,8 @@
+Start Time: 2025-05-05 20:59:52.024357
+User ID: 7659825162
+Username: maxtornow
+phone_number: 998502002468
+collect_fio: Гитинов магомедрасул магомедсаидович
+platform_login: 03 UZS
+api_key: Узбекистан
+workgroup_name: Ташкент Шота Руставели 144, 6 этаж кв 174

@@ -1,0 +1,8 @@
+Start Time: 2025-05-30 12:17:12.573642
+User ID: 7375209679
+Username: obit11777
+phone_number: 998903976971
+collect_fio: Атаханов Сабыржан Султамбаевич
+platform_login: 02.13 RUB | Exotic UZB…
+api_key: UZB Ташкент
+workgroup_name: Город от Ташкент, улица Махтумкули 99в/33

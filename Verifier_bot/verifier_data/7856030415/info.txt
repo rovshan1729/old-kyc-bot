@@ -1,0 +1,8 @@
+Start Time: 2025-03-07 15:25:10.213797
+User ID: 7856030415
+Username: user_familly
+phone_number: 89656202525
+collect_fio: Гайсин Рифат Радикович
+platform_login: 02.6 RUB | Exotic Out
+api_key: Россия
+workgroup_name: Казань, Спартаковская 2

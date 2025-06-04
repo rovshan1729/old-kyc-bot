@@ -1,0 +1,8 @@
+Start Time: 2025-02-10 20:47:36.266696
+User ID: 1435564702
+Username: None
+phone_number: +998910113117
+collect_fio: Алижанов Дониёр Комилжанович
+platform_login: 05.9 RUB | Exotic Out
+api_key: Россия
+workgroup_name: Наманганская область, Касансайский р-н, Навбахор-1 МФЙ, 72-13

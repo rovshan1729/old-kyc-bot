@@ -1,0 +1,8 @@
+Start Time: 2025-03-21 15:01:59.796617
+User ID: 1641773985
+Username: soxa90
+phone_number: 79057049090
+collect_fio: Жалилов Сохибжон Мухамадаминович
+platform_login: 05.11
+api_key: Узбекистан России
+workgroup_name: Наманган регион

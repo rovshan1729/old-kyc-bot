@@ -1,0 +1,8 @@
+Start Time: 2025-03-24 12:01:48.496581
+User ID: 6645828909
+Username: Abdullat2507
+phone_number: 79611260253
+collect_fio: Абдухакимов Абдувосит Абдувохид угли
+platform_login: 05.14
+api_key: Узбекистан Россия
+workgroup_name: Мазорбог уртакуча

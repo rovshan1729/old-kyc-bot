@@ -1,0 +1,8 @@
+Start Time: 2025-02-10 20:42:33.629674
+User ID: 1629114493
+Username: Naziimjonn
+phone_number: 998931072020
+collect_fio: Khomidov nazimjon
+platform_login: 05 RUB | Exotic Out
+api_key: Россия
+workgroup_name: Наманганская область косонсой сойча 7

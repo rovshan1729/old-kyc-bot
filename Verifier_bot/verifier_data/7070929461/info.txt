@@ -1,0 +1,8 @@
+Start Time: 2025-02-12 16:10:21.786328
+User ID: 7070929461
+Username: kirakl03
+phone_number: 79186483109
+collect_fio: Югова Наталья Кирилловна
+platform_login: 04.7 RUB | Exotic Out
+api_key: Россия
+workgroup_name: Газгольдерная 10

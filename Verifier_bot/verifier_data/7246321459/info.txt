@@ -1,0 +1,8 @@
+Start Time: 2025-05-18 21:46:27.510908
+User ID: 7246321459
+Username: edvcash
+phone_number: 77477507314
+collect_fio: Rajabov Amal Shavkatovich
+platform_login: 02.15 RUB | Exotic UZS Out
+api_key: Uzs
+workgroup_name: Navoiy, Navoi 52-69

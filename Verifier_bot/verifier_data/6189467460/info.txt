@@ -1,0 +1,8 @@
+Start Time: 2025-02-20 22:30:07.190362
+User ID: 6189467460
+Username: BiG_BoSSn1
+phone_number: 89827063472
+collect_fio: Козлов Никита Сергеевич
+platform_login: 11.7 RUB | Exotic Out
+api_key: Рф
+workgroup_name: Мельникова 25

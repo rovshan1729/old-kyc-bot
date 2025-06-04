@@ -1,0 +1,8 @@
+Start Time: 2025-05-05 23:49:43.379755
+User ID: 7365343692
+Username: fondlex
+phone_number: 79251774269
+collect_fio: Литвинов Кирилл Александрович
+platform_login: 04.15 RUB | Exotic Out
+api_key: Россия
+workgroup_name: г. Москва, 3-я Красногвардейская д 3

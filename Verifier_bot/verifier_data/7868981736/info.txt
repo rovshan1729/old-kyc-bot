@@ -1,0 +1,8 @@
+Start Time: 2025-05-20 13:32:15.326668
+User ID: 7868981736
+Username: OTCtetherUAE
+phone_number: +7 775 108 57 04
+collect_fio: Аманжол Алим Арманов
+platform_login: 10 KZT | Exotic
+api_key: Казахстан
+workgroup_name: Толеби 50

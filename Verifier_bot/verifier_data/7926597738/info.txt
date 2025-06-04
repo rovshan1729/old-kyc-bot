@@ -1,0 +1,8 @@
+Start Time: 2025-03-30 17:48:30.952747
+User ID: 7926597738
+Username: SETTRC
+phone_number: 89777463943
+collect_fio: Носов Владислав Михайлович
+platform_login: 14.1 RUB | Exotic Out
+api_key: Москва
+workgroup_name: Мытищи, Улица Полковника Романова, дом 7

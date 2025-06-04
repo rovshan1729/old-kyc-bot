@@ -1,0 +1,8 @@
+Start Time: 2025-02-03 13:48:29.733441
+User ID: 594195555
+Username: mscwsasha
+phone_number: 79161363449
+collect_fio: Боботков Александр Михайлович
+platform_login: 02 RUB | Exotic Out ^
+api_key: Россия 🇷🇺
+workgroup_name: Москва

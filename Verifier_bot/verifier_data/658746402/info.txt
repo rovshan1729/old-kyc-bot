@@ -1,0 +1,8 @@
+Start Time: 2025-05-07 17:48:23.564248
+User ID: 658746402
+Username: lockautt
+phone_number: 79879390148
+collect_fio: Емашев Павел Алексеевич
+platform_login: 03 KZT | Exotic
+api_key: Казахстан
+workgroup_name: Ташкент Янги Олмазор 17-20

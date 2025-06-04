@@ -1,0 +1,8 @@
+Start Time: 2025-03-21 21:09:28.070961
+User ID: 6064936787
+Username: Umedjon1991taksi
+phone_number: 89995510111
+collect_fio: Рахимов умиджон зокиржон угли
+platform_login: 05.10
+api_key: Узбекский. Россия
+workgroup_name: Косонсой сойча дом 11

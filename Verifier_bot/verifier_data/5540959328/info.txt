@@ -1,0 +1,8 @@
+Start Time: 2025-02-10 21:04:54.127922
+User ID: 5540959328
+Username: Sultanov2001
+phone_number: 998934444873
+collect_fio: Sultonov Jabborkhon Sahobiddin ugli
+platform_login: 05.6 RUB | Exotic Out
+api_key: Россия, Узбекистан
+workgroup_name: Наманганская область, Касансайский р-н, Навбахор-1 МФЙ, 70-5

@@ -1,0 +1,8 @@
+Start Time: 2025-05-07 22:31:58.006159
+User ID: 6321693260
+Username: Davron_27_02
+phone_number: 79015004575
+collect_fio: Ismoilov Davronbek Muminjon Ugli
+platform_login: 02 UZS | Exotic
+api_key: Uzbekistan
+workgroup_name: Namangan

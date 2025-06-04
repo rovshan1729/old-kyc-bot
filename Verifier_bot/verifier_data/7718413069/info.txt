@@ -1,0 +1,8 @@
+Start Time: 2025-02-25 14:24:28.825432
+User ID: 7718413069
+Username: telegr228
+phone_number: 79117245111
+collect_fio: Гайнутдинов Евгений Павлович
+platform_login: 14 RUB | Exotic Out
+api_key: РФ
+workgroup_name: Московский проспект 73к5

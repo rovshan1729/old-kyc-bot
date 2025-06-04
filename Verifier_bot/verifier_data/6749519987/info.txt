@@ -1,0 +1,8 @@
+Start Time: 2025-03-05 15:55:10.052590
+User ID: 6749519987
+Username: romwk
+phone_number: 998772651888
+collect_fio: Test
+platform_login: Test
+api_key: Test
+workgroup_name: Test

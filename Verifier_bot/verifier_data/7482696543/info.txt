@@ -1,0 +1,8 @@
+Start Time: 2025-02-13 12:53:50.651622
+User ID: 7482696543
+Username: Braftokam
+phone_number: 79257482222
+collect_fio: KAKHOROV YUSUFJON USMONJON UGLI
+platform_login: Exotik
+api_key: Росия узбекистон
+workgroup_name: Намангански област наждар тепа 27

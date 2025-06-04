@@ -1,0 +1,8 @@
+Start Time: 2025-02-10 19:07:14.928727
+User ID: 6249413392
+Username: chapachapp
+phone_number: 79878767102
+collect_fio: Акберов Тимур Захидович
+platform_login: chapachapp
+api_key: Рф, узс, тгс, азс
+workgroup_name: Орск Оренбургская область

@@ -1,0 +1,8 @@
+Start Time: 2025-05-27 16:24:19.163840
+User ID: 7990734105
+Username: whitexchange3
+phone_number: +79053876794
+collect_fio: Цыбин Егор Олегович
+platform_login: White Exchange 3
+api_key: Саратов
+workgroup_name: 50 лет октября 120

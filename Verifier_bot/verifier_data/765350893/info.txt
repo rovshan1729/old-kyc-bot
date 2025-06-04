@@ -1,0 +1,8 @@
+Start Time: 2025-02-17 11:37:40.851633
+User ID: 765350893
+Username: mumuesli
+phone_number: 89162157594
+collect_fio: Муминов Муслим Мухамадович
+platform_login: Tokyo
+api_key: Moscow
+workgroup_name: Багратионовский проезд 7к3

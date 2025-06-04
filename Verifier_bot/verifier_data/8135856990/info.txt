@@ -1,0 +1,8 @@
+Start Time: 2025-03-02 19:36:38.792834
+User ID: 8135856990
+Username: Dsds675
+phone_number: 995593430568
+collect_fio: Юспа Георгий Валерьевич
+platform_login: 02.5 RUB
+api_key: Ru
+workgroup_name: Москва, Брянская 12

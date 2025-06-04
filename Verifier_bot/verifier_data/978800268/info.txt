@@ -1,0 +1,8 @@
+Start Time: 2025-05-14 19:27:32.744509
+User ID: 978800268
+Username: w0Kom
+phone_number: 992988701828
+collect_fio: Юнусов Мунир Иброхимович
+platform_login: w0kom
+api_key: ру
+workgroup_name: Таджикистан, Согдийский область, ул Маматов 80

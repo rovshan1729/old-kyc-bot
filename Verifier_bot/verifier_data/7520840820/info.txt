@@ -1,0 +1,8 @@
+Start Time: 2025-03-19 22:54:24.179065
+User ID: 7520840820
+Username: ChesterMing78
+phone_number: 89853468881
+collect_fio: Черных Артем Александрович
+platform_login: 22 RUB | Exotic
+api_key: Москва
+workgroup_name: Москва, улица Пырьева, дом 22, кв 29

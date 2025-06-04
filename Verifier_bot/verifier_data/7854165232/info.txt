@@ -1,0 +1,8 @@
+Start Time: 2025-02-16 15:19:20.107721
+User ID: 7854165232
+Username: V_Company_003
+phone_number: +7 996 678 30 34
+collect_fio: Чернецов Василий Андреевич
+platform_login: 11.4 RUB | Exotic Out
+api_key: РФ
+workgroup_name: Москва , Ленинский проспект д53 , кв16

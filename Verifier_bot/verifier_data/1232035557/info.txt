@@ -1,0 +1,8 @@
+Start Time: 2025-02-15 15:13:54.289724
+User ID: 1232035557
+Username: sulton_93
+phone_number: 998930359300
+collect_fio: Qodirov Muhammadsilton Shuhratbek ogli
+platform_login: 05.4 RUB | Exotic Out
+api_key: Russian Uzbekistan
+workgroup_name: Andijon viloyati Oltinkol tumani Ganjiravon MFY

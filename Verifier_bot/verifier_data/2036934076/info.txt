@@ -1,0 +1,8 @@
+Start Time: 2025-02-16 12:03:17.676064
+User ID: 2036934076
+Username: GafforovO204
+phone_number: 998900411116
+collect_fio: Гаффоров Отабек Отаниёзович
+platform_login: 10.1 RUB | Exotic Out
+api_key: Узбекистан
+workgroup_name: Навоиский область Кызылтепинский район

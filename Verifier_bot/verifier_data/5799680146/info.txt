@@ -1,0 +1,8 @@
+Start Time: 2025-03-22 23:22:20.613283
+User ID: 5799680146
+Username: Murodjon5050
+phone_number: 998990085050
+collect_fio: Одилжонов мурожон алижон угли
+platform_login: 05.13
+api_key: Узбекистон Россия
+workgroup_name: Норинтепа сойбойи махала 149

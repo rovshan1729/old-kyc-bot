@@ -1,0 +1,8 @@
+Start Time: 2025-05-29 19:23:14.119577
+User ID: 7076331444
+Username: Mosli_Sanders
+phone_number: 89376703608
+collect_fio: Барцаев Владислав Владимирович
+platform_login: 04.16 RUB
+api_key: Москва
+workgroup_name: Москва

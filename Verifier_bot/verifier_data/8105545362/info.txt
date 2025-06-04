@@ -1,0 +1,8 @@
+Start Time: 2025-04-26 21:08:34.239873
+User ID: 8105545362
+Username: masteryyogo
+phone_number: 79854567295
+collect_fio: Бакиров Марлен Искандерович
+platform_login: Ateam
+api_key: Армения
+workgroup_name: Совхозная 18к1

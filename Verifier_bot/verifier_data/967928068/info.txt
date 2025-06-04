@@ -1,0 +1,8 @@
+Start Time: 2025-03-20 20:28:02.791688
+User ID: 967928068
+Username: absakmv
+phone_number: 0552405500
+collect_fio: Абдесов Акмаль Рустамович
+platform_login: 01 KGS | Exotic
+api_key: Киргизия
+workgroup_name: Токтогула 200

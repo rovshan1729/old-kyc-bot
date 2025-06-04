@@ -1,0 +1,8 @@
+Start Time: 2025-03-18 16:09:15.185207
+User ID: 2032142249
+Username: kaarvv
+phone_number: 79668788873
+collect_fio: Каримов Руслан Сухробович
+platform_login: exotic
+api_key: Санкт Петербург
+workgroup_name: Строителей 3

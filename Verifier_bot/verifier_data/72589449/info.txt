@@ -1,0 +1,8 @@
+Start Time: 2025-05-14 18:12:37.732167
+User ID: 72589449
+Username: osyxo
+phone_number: 998908188844
+collect_fio: YODGOROV SAIDALOKHON
+platform_login: 02.13 RUB | Exotic UZB Out
+api_key: Узбекистан
+workgroup_name: Гарденс Е6

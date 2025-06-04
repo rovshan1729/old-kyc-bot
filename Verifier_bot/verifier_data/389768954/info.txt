@@ -1,0 +1,8 @@
+Start Time: 2025-05-20 16:46:13.481474
+User ID: 389768954
+Username: Pro_Panda
+phone_number: +79186473331
+collect_fio: Данилов Данил Алексеевич
+platform_login: 28 RUB | Exotic Out
+api_key: РФ
+workgroup_name: Москва, Перовское шоссе 2к3

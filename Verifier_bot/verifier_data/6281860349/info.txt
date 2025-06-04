@@ -1,0 +1,8 @@
+Start Time: 2025-02-12 21:09:30.602936
+User ID: 6281860349
+Username: nuroni49
+phone_number: 998937065353
+collect_fio: TEMIROV UMID MUNAVVAROVICH
+platform_login: 05.5 RUB | Exotic Out
+api_key: Россия Узбекистан
+workgroup_name: Наманганская област, Касансайский район, Олмазор 49

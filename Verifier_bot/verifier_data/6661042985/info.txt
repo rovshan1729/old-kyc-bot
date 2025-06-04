@@ -1,0 +1,8 @@
+Start Time: 2025-01-31 17:13:20.814731
+User ID: 6661042985
+Username: Viti4o_0
+phone_number: +79788632176
+collect_fio: Смирнов Виктор Андреевич
+platform_login: 04.1 RUB | Exotic Out
+api_key: Ру
+workgroup_name: Г Севастополь, Ромашковая 13

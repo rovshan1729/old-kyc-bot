@@ -1,0 +1,8 @@
+Start Time: 2025-05-26 21:15:18.632530
+User ID: 7906338865
+Username: whiteexchangee
+phone_number: 9603479380
+collect_fio: Обидин Максим Юрьевич
+platform_login: Ene
+api_key: РФ
+workgroup_name: Москва, 2й вышейславцев переулок 17
