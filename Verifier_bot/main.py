@@ -364,7 +364,7 @@ def save_to_db(user_id: str):
         os.path.exists(video_path)
     ])
 
-    is_verified = int(all(required_fields) and files_exist)
+    is_verified = False
 
     photo1_link = f"verifier_data/{user_id}/passport_photo_1.jpg"
     photo2_link = f"verifier_data/{user_id}/passport_photo_2.jpg"
