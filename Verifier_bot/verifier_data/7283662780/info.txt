@@ -1,0 +1,8 @@
+Start Time: 2025-06-10 11:23:49.449099
+User ID: 7283662780
+Username: IAI0009
+phone_number: 447893950918
+collect_fio: Asadov Islom Ismatilla ugli
+platform_login: 22.1 RUB Unired | Exotic
+api_key: Uzbekistan
+workgroup_name: Toshkent Shahar,mirzo ulugbek tumani,olimlar 31/15

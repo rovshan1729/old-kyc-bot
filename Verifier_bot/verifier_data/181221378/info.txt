@@ -1,0 +1,8 @@
+Start Time: 2025-06-04 16:22:43.410257
+User ID: 181221378
+Username: makavelitwo
+phone_number: +7 920 324-66-66
+collect_fio: Симонян Тигран Робертович
+platform_login: 31 RUB | Exotic Out
+api_key: Таджикичтан рублевые выплаты
+workgroup_name: Болотниковская 36к2

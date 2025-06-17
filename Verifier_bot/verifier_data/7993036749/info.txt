@@ -1,0 +1,8 @@
+Start Time: 2025-06-05 14:21:15.658908
+User ID: 7993036749
+Username: zegna234
+phone_number: 998901296349
+collect_fio: Мусабоев Аббос Зафарович
+platform_login: Workshop / Money
+api_key: Узбекситан
+workgroup_name: Ташкент Тарас Шевченко

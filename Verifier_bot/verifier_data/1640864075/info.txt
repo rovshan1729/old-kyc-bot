@@ -1,0 +1,8 @@
+Start Time: 2025-06-12 17:33:20.699157
+User ID: 1640864075
+Username: viktorial2905
+phone_number: 79226557464
+collect_fio: Литвинова Виктория Пантелеевна
+platform_login: 04.18 RUB | Exotic Out
+api_key: Россия
+workgroup_name: Полянка 12

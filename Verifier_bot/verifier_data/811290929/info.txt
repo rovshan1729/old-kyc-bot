@@ -1,0 +1,8 @@
+Start Time: 2025-06-16 08:08:07.138702
+User ID: 811290929
+Username: Jet074
+phone_number: 998990744470
+collect_fio: Asadov Biloliddin Ismatilla o’g’li
+platform_login: 22.1 RUB Unired | Exotic
+api_key: Uzbekistan
+workgroup_name: Toshkent Shahar,mirzo ulugbek tumani,olimlar 31/15

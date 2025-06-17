@@ -1,0 +1,8 @@
+Start Time: 2025-06-14 05:44:02.818491
+User ID: 323068222
+Username: world_king_12
+phone_number: 998903029558
+collect_fio: Isakbekov Jahongirbek Qosimbek òğli
+platform_login: 02.19 RUB Unired | Exotic Out
+api_key: Узбекистан
+workgroup_name: Город Фергана

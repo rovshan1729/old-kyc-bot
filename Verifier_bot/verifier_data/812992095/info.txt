@@ -1,8 +1,0 @@
-Start Time: 2025-02-10 15:04:52.963232
-User ID: 812992095
-Username: skrip22
-phone_number: +7 978 749 34 36
-collect_fio: Горач Иван Сергеевич
-platform_login: 04.3 RUB | Exotic Out
-api_key: РФ
-workgroup_name: Москва ул. Газгольдерская

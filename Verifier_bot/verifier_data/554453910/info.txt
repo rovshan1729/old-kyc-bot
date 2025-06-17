@@ -1,8 +1,0 @@
-Start Time: 2025-02-11 08:50:34.623940
-User ID: 554453910
-Username: dead_0in0
-phone_number: 79773291559
-collect_fio: Пэдуре Виктор
-platform_login: 04 RUB
-api_key: Рус
-workgroup_name: Красноказарменская 15
