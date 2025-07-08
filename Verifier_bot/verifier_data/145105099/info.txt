@@ -1,0 +1,8 @@
+Start Time: 2025-06-29 02:44:52.753963
+User ID: 145105099
+Username: TheDT1
+phone_number: 79191010506
+collect_fio: Муминжонов Бехзод Абдуллаемжонович
+platform_login: 22.2 RUB Unired | Exotic
+api_key: Узбекистан
+workgroup_name: Москва Котельники Парковый мкр 1к7

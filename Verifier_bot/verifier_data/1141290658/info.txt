@@ -1,0 +1,8 @@
+Start Time: 2025-06-17 16:07:47.651285
+User ID: 1141290658
+Username: None
+phone_number: 34627371776
+collect_fio: Везменский Даниил Александрович
+platform_login: 04.17 RUB | Exotic Out
+api_key: Ru
+workgroup_name: ул. Советская, 10
