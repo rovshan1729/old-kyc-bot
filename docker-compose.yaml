@@ -1,0 +1,12 @@
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: old_kyc_bot_backend
+    command: python run_service.py
+    volumes:
+      - ./:/app
+    restart: always
+
