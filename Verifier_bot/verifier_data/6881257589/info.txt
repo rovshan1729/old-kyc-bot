@@ -1,0 +1,8 @@
+Start Time: 2025-07-10 17:41:41.630659
+User ID: 6881257589
+Username: fed444i
+phone_number: +79777930000
+collect_fio: Мирзочонов Шахбозчон Неъматович
+platform_login: 02 RUB_TJS | Paradoks | In
+api_key: Таджикистан
+workgroup_name: Таджикистан, Душанбе
