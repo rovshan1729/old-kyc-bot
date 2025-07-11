@@ -1,0 +1,22 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: old_kyc_backend
+    volumes:
+      - ./backend:/app/backend
+    ports:
+      - "8020:8020"
+    restart: always
+    command: python3 backend/main.py
+
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: old_kyc_bot
+    volumes:
+      - ./Verifier_bot:/app/Verifier_bot
+    restart: always
+    command: python3 Verifier_bot/main.py
